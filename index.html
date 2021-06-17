@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Tuner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+</head>
+<body class="font-monospace">
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-12 text-center text">
+                <h1>彈射世界 技能對軸Skill Tuner</h1>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-7">
+                <div class="row">
+                    <span class="col-3 mx-2 border border-primary border-3 rounded">
+                        主位1 技能槽
+                        <br>
+                        <input class="w-100" type="text" placeholder="技能槽">
+                        <div class="row mt-2">
+                            <div class="col-6"></div>
+                            <div class="col-6 border border-primary border-3 rounded">
+                                副位1 技能槽
+                                <br>
+                                <br>
+                                <input class="w-100" type="text" placeholder="技能槽">
+                            </div>
+                        </div>
+                    </span>
+                    <span class="col-3 mx-2 border border-secondary border-3 rounded">
+                        主位2 技能槽
+                        <br>
+                        <input class="w-100" type="text" placeholder="技能槽">
+                        <div class="row mt-2">
+                            <div class="col-6"></div>
+                            <div class="col-6 border border-secondary border-3 rounded">
+                                副位2 技能槽
+                                <br>
+                                <br>
+                                <input class="w-100" type="text" placeholder="技能槽">
+                            </div>
+                        </div>
+                    </span>
+                    <span class="col-3 mx-2 border border-primary border-3 rounded">
+                        主位3 技能槽
+                        <br>
+                        <input class="w-100" type="text" placeholder="技能槽">
+                        <div class="row mt-2">
+                            <div class="col-6"></div>
+                            <div class="col-6 border border-primary border-3 rounded">
+                                副位3 技能槽
+                                <br>
+                                <br>
+                                <input class="w-100" type="text" placeholder="技能槽">
+                            </div>
+                        </div>
+                    </span>
+                </div>
+                <div class="row text-center mt-3">
+                    <span class="col-3 mx-2 border border-primary border-3 rounded">
+                        Union1 技能初始充能
+                        <input class="w-50" type="text" placeholder="充能比例">%
+                    </span>
+                    <span class="col-3 mx-2 border border-secondary border-3 rounded">
+                        Union2 技能初始充能
+                        <input class="w-50" type="text" placeholder="充能比例">%
+                    </span>
+                    <span class="col-3 mx-2 border border-primary border-3 rounded">
+                        Union3 技能初始充能
+                        <input class="w-50" type="text" placeholder="充能比例">%
+                    </span>
+                    <span class="col-12 mt-2 text-center fw-bold">
+                        ※主位、副位、武器初始充能在此相加填入
+                    </span>
+                </div>
+                <hr class="border border-primary border-2 bg-primary">
+                <div class="row text-center mt-2">
+                    <span class="col-3 mx-2 border border-primary border-3 rounded">
+                        Union1 技能發動充能
+                        <div class="row">
+                            <div class="col-12">
+                                充能1號位
+                                <input class="w-50" type="text" placeholder="充能比例">%
+                            </div>
+                            <div class="col-12">
+                                充能2號位
+                                <input class="w-50" type="text" placeholder="充能比例">%
+                            </div>
+                            <div class="col-12">
+                                充能3號位
+                                <input class="w-50" type="text" placeholder="充能比例">%
+                            </div>
+                        </div>
+                    </span>
+                    <span class="col-3 mx-2 border border-secondary border-3 rounded">
+                        Union2 技能發動充能
+                        <div class="row">
+                            <div class="col-12">
+                                充能1號位
+                                <input class="w-50" type="text" placeholder="充能比例">%
+                            </div>
+                            <div class="col-12">
+                                充能2號位
+                                <input class="w-50" type="text" placeholder="充能比例">%
+                            </div>
+                            <div class="col-12">
+                                充能3號位
+                                <input class="w-50" type="text" placeholder="充能比例">%
+                            </div>
+                        </div>
+                    </span>
+                    <span class="col-3 mx-2 border border-primary border-3 rounded">
+                        Union3 技能發動充能
+                        <div class="row">
+                            <div class="col-12">
+                                充能1號位
+                                <input class="w-50" type="text" placeholder="充能比例">%
+                            </div>
+                            <div class="col-12">
+                                充能2號位
+                                <input class="w-50" type="text" placeholder="充能比例">%
+                            </div>
+                            <div class="col-12">
+                                充能3號位
+                                <input class="w-50" type="text" placeholder="充能比例">%
+                            </div>
+                        </div>
+                    </span>
+                    <span class="col-12 mt-2 text-center fw-bold">
+                        ※主位、副位、武器發動技能充能在此相加填入
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary rounded-pill w-100">計算</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary rounded-pill w-100 px-10">清除</button>
+                    </div>
+                </div>                
+            </div>
+            <div class="col-5">
+                <svg id="skillPainter">
+
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
