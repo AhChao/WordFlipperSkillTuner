@@ -2,7 +2,7 @@ let drawTarget = "skillPainter";
 let drawWitdh = document.getElementById("skillPainter").clientWidth;
 let lineMargin = drawWitdh/10;
 let lineWidth = drawWitdh/3.5;
-let lineHeight = 100;
+let lineHeight = 50;
 let primaryColor = "#0d6efd";
 let secondaryColor = "#6c757d";
 let warningColor = "#ffc107";
@@ -22,6 +22,7 @@ function svgInit()
 
 function drawUnion(unionNo,text,yPos)
 {
+    console.log("drawUnion:",unionNo,text,yPos)
     let x;
     let y = yPos;
     let fillColor;
@@ -32,12 +33,12 @@ function drawUnion(unionNo,text,yPos)
     }
     if(unionNo == 2)
     {
-        x = lineMargin;
+        x = lineMargin*2 + lineWidth;
         fillColor = secondaryColor;
     }
     if(unionNo == 3)
     {
-        x = lineMargin;
+        x = lineMargin*3 + lineWidth*2;
         fillColor = warningColor;
     }
 

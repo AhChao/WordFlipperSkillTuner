@@ -20,7 +20,7 @@
                     <span class="col-3 mx-2 border border-primary border-3 rounded">
                         主位1 技能槽
                         <br>
-                        <input id="mainSkill1" class="w-100" type="number" placeholder="技能槽">
+                        <input id="mainSkill1" class="w-100" type="number" placeholder="技能槽" value="200">
                         <div class="row mt-2">
                             <div class="d-none d-md-block col-6"></div>
                             <div class="col-12 col-md-6 border border-primary border-3 rounded">
@@ -34,7 +34,7 @@
                     <span class="col-3 mx-2 border border-secondary border-3 rounded">
                         主位2 技能槽
                         <br>
-                        <input id="mainSkill2" class="w-100" type="number" placeholder="技能槽">
+                        <input id="mainSkill2" class="w-100" type="number" placeholder="技能槽" value="305">
                         <div class="row mt-2">
                             <div class="d-none d-md-block col-6"></div>
                             <div class="col-12 col-md-6 border border-primary border-3 rounded">
@@ -48,7 +48,7 @@
                     <span class="col-3 mx-2 border border-warning border-3 rounded">
                         主位3 技能槽
                         <br>
-                        <input id="mainSkill3" class="w-100" type="number" placeholder="技能槽">
+                        <input id="mainSkill3" class="w-100" type="number" placeholder="技能槽" value="410">
                         <div class="row mt-2">
                             <div class="d-none d-md-block col-6"></div>
                             <div class="col-12 col-md-6 border border-warning border-3 rounded">
@@ -154,8 +154,9 @@
                 </div>                
             </div>
             <div class="col-5">
-                <svg id="skillPainter">
-
+                <p class="fs-2 col-12">技能施放順序</p>
+                <p id="skillUseOrderField" class="fs-4 col-12"></p>
+                <svg id="skillPainter" class="w-100" style="height: 100%;">
                 </svg>
             </div>
         </div>
