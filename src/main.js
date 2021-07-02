@@ -103,12 +103,18 @@ function useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useS
 
 function useSkillChargeCalculation(lengthToSkill,skillLength,useSkillUnionIndex)
 {    
-    let skillChargeRatio = [inputDict["unionSkillChargeTime"+(useSkillUnionIndex+1)+"1"],
-                            inputDict["unionSkillChargeTime"+(useSkillUnionIndex+1)+"2"],
-                            inputDict["unionSkillChargeTime"+(useSkillUnionIndex+1)+"3"]];
-    console.log("Charging1",lengthToSkill,skillChargeRatio);
-    for(let index in lengthToSkill) lengthToSkill[index] += skillLength[index]*skillChargeRatio[index];
-    console.log("Charging2",lengthToSkill);
+    let skillChargeRatio = [inputDict["unionSkillCharge"+(useSkillUnionIndex+1)+"1"],
+                            inputDict["unionSkillCharge"+(useSkillUnionIndex+1)+"2"],
+                            inputDict["unionSkillCharge"+(useSkillUnionIndex+1)+"3"]];
+    for(let index in lengthToSkill)
+    {
+        if(inputDict["unionSkillChargeTime"+String(useSkillUnionIndex+1)+String(parseInt(index)+1)] > 0 )
+        {
+            inputDict["unionSkillChargeTime"+String(useSkillUnionIndex+1)+String(parseInt(index)+1)] -= 1;
+            lengthToSkill[index] -= skillLength[index]*skillChargeRatio[index];
+            if(lengthToSkill[index] < 0 ) lengthToSkill[index] = 0;
+        }
+    } 
 }
 
 function writeDownSkillUseOrder()
