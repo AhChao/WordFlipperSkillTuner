@@ -26,11 +26,11 @@ function reloadDictData()
 }
 
 //#region : callByHTMLValueSetUp
-function calculateUnion1SkillLength()
+function calculateUnionSkillLength(positionId)
 {
-    let mainSkill = d3.select("#mainSkill1").node().value == "" ? 0 : parseInt(d3.select("#mainSkill1").node().value);
-    let subSkill = d3.select("#subSkill1").node().value == "" ? 0 : parseInt(d3.select("#subSkill1").node().value);
-    d3.select("#unionSkill1").node().value = mainSkill!=0&&subSkill!=0 ? (mainSkill + subSkill)/2 : mainSkill+subSkill;
+    let mainSkill = d3.select("#mainSkill"+positionId).node().value == "" ? 0 : parseInt(d3.select("#mainSkill"+positionId).node().value);
+    let subSkill = d3.select("#subSkill"+positionId).node().value == "" ? 0 : parseInt(d3.select("#subSkill"+positionId).node().value);
+    d3.select("#unionSkill"+positionId).node().value = mainSkill!=0&&subSkill!=0 ? (mainSkill + subSkill)/2 : mainSkill+subSkill;
 }
 //#endregion callByHTMLValueSetUp
 

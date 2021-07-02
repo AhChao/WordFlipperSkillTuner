@@ -21,14 +21,14 @@
                     <span class="col-3 mx-2 border border-primary border-3 rounded">
                         主位1 技能槽
                         <br>
-                        <input id="mainSkill1" class="w-100" type="number" placeholder="技能槽">
+                        <input id="mainSkill1" class="w-100" type="number" placeholder="技能槽" onchange="calculateUnionSkillLength(1)">
                         <div class="row mt-2">
                             <div class="d-none d-md-block col-6"></div>
                             <div class="col-12 col-md-6 border border-primary border-3 rounded">
                                 副位1 技能槽
                                 <br>
                                 <br>
-                                <input id="subSkill1" class="w-100" type="number" placeholder="技能槽">
+                                <input id="subSkill1" class="w-100" type="number" placeholder="技能槽" onchange="calculateUnionSkillLength(1)">
                             </div>
                             <div class="col-12">
                                 <span >Union1 條長</span>
@@ -39,14 +39,14 @@
                     <span class="col-3 mx-2 border border-secondary border-3 rounded">
                         主位2 技能槽
                         <br>
-                        <input id="mainSkill2" class="w-100" type="number" placeholder="技能槽">
+                        <input id="mainSkill2" class="w-100" type="number" placeholder="技能槽" onchange="calculateUnionSkillLength(2)">
                         <div class="row mt-2">
                             <div class="d-none d-md-block col-6"></div>
                             <div class="col-12 col-md-6 border border-primary border-3 rounded">
                                 副位2 技能槽
                                 <br>
                                 <br>
-                                <input id="subSkill2" class="w-100" type="number" placeholder="技能槽">
+                                <input id="subSkill2" class="w-100" type="number" placeholder="技能槽" onchange="calculateUnionSkillLength(2)">
                             </div>
                             <div class="col-12">
                                 <span >Union2 條長</span>
@@ -57,14 +57,14 @@
                     <span class="col-3 mx-2 border border-warning border-3 rounded">
                         主位3 技能槽
                         <br>
-                        <input id="mainSkill3" class="w-100" type="number" placeholder="技能槽">
+                        <input id="mainSkill3" class="w-100" type="number" placeholder="技能槽" onchange="calculateUnionSkillLength(3)">
                         <div class="row mt-2">
                             <div class="d-none d-md-block col-6"></div>
                             <div class="col-12 col-md-6 border border-warning border-3 rounded">
                                 副位3 技能槽
                                 <br>
                                 <br>
-                                <input id="subSkill3" class="w-100" type="number" placeholder="技能槽">
+                                <input id="subSkill3" class="w-100" type="number" placeholder="技能槽" onchange="calculateUnionSkillLength(3)">
                             </div>
                             <div class="col-12">
                                 <span >Union3 條長</span>
@@ -153,17 +153,19 @@
                         </div>
                     </span>
                     <span class="col-12 mt-2 text-center fw-bold">
-                        ※主位、副位、武器發動技能充能在此相加填入
+                        ※主位、副位、武器發動技能充能在此相加填入<br>
                         ※充能次數填0或默認會以無限次計，無發動次數限制可不填
                     </span>
                 </div>
-                <div>
-                    <span class="fw-bold">技能同時發動順序</span>
-                    <input type="radio" id="skillOrder1" value="single" name="skillOrderRadio">
-                    <label for="single">單人(1 > 2 > 3)</label>
-                
-                    <input type="radio" id="skillOrder2" value="multi" name="skillOrderRadio" checked>
-                    <label for="multi">多人(2 > 3 > 1)</label>
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                        <span class="fw-bold">技能同時發動順序</span>
+                        <input type="radio" id="skillOrder1" value="single" name="skillOrderRadio">
+                        <label for="single">單人(1 > 2 > 3)</label>
+                    
+                        <input type="radio" id="skillOrder2" value="multi" name="skillOrderRadio" checked>
+                        <label for="multi">多人(2 > 3 > 1)</label>
+                    </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-6">
