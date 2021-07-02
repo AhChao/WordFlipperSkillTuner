@@ -1,28 +1,46 @@
 let drawTarget = "skillPainter";
 let drawWitdh = document.getElementById("skillPainter").clientWidth;
 let lineMargin = drawWitdh/10;
-let lineWidth = drawWitdh/3.5;
+let lineWidth = drawWitdh/4;
 let lineHeight = 50;
 let primaryColor = "#0d6efd";
 let secondaryColor = "#6c757d";
 let warningColor = "#ffc107";
 let textColor = "#000000";
-let textXPadding = drawWitdh/12;
-let textYPadding = drawWitdh/10;
+let textXPadding = drawWitdh/16;
+let textYPadding = drawWitdh/18;
+let sizeScale = 0.5;
+let distanceScale = 0.5;
 
 function svgInit()
 {
+    drawBaseLine();
+}
+
+function cleanSVG()
+{
+    d3.select("#"+drawTarget).selectAll("*").remove();
+    drawBaseLine();
+}
+
+function drawBaseLine()
+{
     d3.select("#"+drawTarget).append("rect")
-    .attr("x",0)
+    .attr("x",20)
     .attr("y",0)
     .attr("width",drawWitdh)
     .attr("height",2)
+    .attr("fill",textColor);
+    d3.select("#"+drawTarget).append("text")
+    .attr("x",0)
+    .attr("y",10)
+    .text("0")
     .attr("fill",textColor);
 }
 
 function drawUnion(unionNo,text,yPos)
 {
-    console.log("drawUnion:",unionNo,text,yPos)
+    console.log("drawUnion:",unionNo,text,yPos);
     let x;
     let y = yPos;
     let fillColor;
@@ -46,14 +64,16 @@ function drawUnion(unionNo,text,yPos)
     let textY = yPos+textYPadding;
 
     d3.select("#"+drawTarget).append("rect")
-    .attr("x",x)
-    .attr("y",y)
-    .attr("width",lineWidth)
-    .attr("height",lineHeight)
-    .attr("fill",fillColor);
+    .attr("x",x*distanceScale)
+    .attr("y",y*distanceScale)
+    .attr("width",lineWidth*sizeScale)
+    .attr("height",lineHeight*sizeScale)
+    .attr("fill",fillColor)
+    .attr("stroke","black")
+    .attr("stroke-width","2");
     d3.select("#"+drawTarget).append("text")
-    .attr("x",textX)
-    .attr("y",textY)
+    .attr("x",textX*distanceScale)
+    .attr("y",textY*distanceScale)
     .attr("fill",textColor)
     .text(text);
 }

@@ -1,5 +1,4 @@
-const ids = ['mainSkill1', 'mainSkill2', 'mainSkill3',
-'subSkill1','subSkill2','subSkill3',
+const ids = ['unionSkill1', 'unionSkill2', 'unionSkill3',
 'unionInitCharge1','unionInitCharge2','unionInitCharge3',
 'unionSkillCharge11','unionSkillCharge12','unionSkillCharge13',
 'unionSkillCharge21','unionSkillCharge22','unionSkillCharge23',
@@ -14,6 +13,7 @@ const elements = document.querySelectorAll(ids.map(id => `#${id}`).join(', '));
 
 function init()
 {
+    svgInit();
 }
 
 function reloadDictData()
@@ -25,13 +25,21 @@ function reloadDictData()
     }
 }
 
+//#region : callByHTMLValueSetUp
+function calculateUnion1SkillLength()
+{
+    let mainSkill = d3.select("#mainSkill1").node().value == "" ? 0 : parseInt(d3.select("#mainSkill1").node().value);
+    let subSkill = d3.select("#subSkill1").node().value == "" ? 0 : parseInt(d3.select("#subSkill1").node().value);
+    d3.select("#unionSkill1").node().value = mainSkill!=0&&subSkill!=0 ? (mainSkill + subSkill)/2 : mainSkill+subSkill;
+}
+//#endregion callByHTMLValueSetUp
+
 function clickCalculate()
 {
+    cleanSVG();
     orderRecord = [];
     reloadDictData();
-    let skillLength = [(inputDict["mainSkill1"]+inputDict["subSkill1"])/2,
-                        (inputDict["mainSkill2"]+inputDict["subSkill2"])/2,
-                        (inputDict["mainSkill3"]+inputDict["subSkill3"])/2,];
+    let skillLength = [inputDict["unionSkill1"],inputDict["unionSkill2"],inputDict["unionSkill3"]];
     
     let initLength = [skillLength[0]*(inputDict["unionInitCharge1"]*0.01),
                     skillLength[1]*(inputDict["unionInitCharge2"]*0.01),
@@ -39,7 +47,7 @@ function clickCalculate()
 
     console.log(skillLength,initLength);
 
-    loopGenerateLine(skillLength,initLength,3000);
+    loopGenerateLine(skillLength,initLength,1500);
 }
 
 function loopGenerateLine(skillLength,initLength,endValue)
@@ -49,39 +57,48 @@ function loopGenerateLine(skillLength,initLength,endValue)
                         skillLength[2]-initLength[2],];
     let lineYPos = [0,0,0]; 
     let time = 0;
-    let skillOrder = [2,3,1];
+    let skillOrder = document.getElementById("skillOrder2").checked == true ? [2,3,1] : [1,2,3];
     
     while(Math.min(...lineYPos)<endValue)
     {//function drawUnion(unionNo,text,yPos)
-        console.log("runningloop",Math.min(...lineYPos),endValue);
-        console.log("lengthToSkil", lengthToSkill);
-        // if(getValueAppearTimes(Math.min(...lengthToSkill),lengthToSkill)>1)
-        // {
-
-        // }
-        // else
-        //{
             let addTime = Math.min(...lengthToSkill);
-            
             time += addTime;
             let useSkillUnionIndex = getIndexOfMin(lengthToSkill);
-            orderRecord.push(useSkillUnionIndex+1);
-            for(let index in lengthToSkill) lengthToSkill[index] -=addTime;
-            for(let index in lineYPos) lineYPos[index] +=addTime;
+            if(getValueAppearTimes(Math.min(...lengthToSkill),lengthToSkill)>1)
+                useSkillUnionIndex = skillInSameTimeReturnWhichIndexToUse(skillOrder,lengthToSkill);
+
+            useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useSkillUnionIndex);
             
-            drawUnion(useSkillUnionIndex+1,lineYPos[useSkillUnionIndex],lineYPos[useSkillUnionIndex]);
-            
-            if(lengthToSkill[useSkillUnionIndex]==0)
-            {
-                lengthToSkill[useSkillUnionIndex]+= skillLength[useSkillUnionIndex];
-            }
-            //console.log("ck",lengthToSkill);
-            //lengthToSkill[useSkillUnionIndex] += skillLength[useSkillUnionIndex];
-            
-            useSkillChargeCalculation(lengthToSkill,skillLength,useSkillUnionIndex);
-        //}
     }
     writeDownSkillUseOrder();
+}
+
+function skillInSameTimeReturnWhichIndexToUse(skillOrder,lengthToSkill)
+{
+    let minValue = Math.min(...lengthToSkill);   
+    let meetMinIndex = [];
+    for(let i in lengthToSkill) if(lengthToSkill[i]==minValue) meetMinIndex.push(parseInt(i)+1);
+    console.log("Same Time Detect",minValue,meetMinIndex,skillOrder);
+    for(let i in skillOrder)
+    {
+        if(meetMinIndex.includes(skillOrder[i])) return skillOrder[i]-1;
+    }
+}
+
+function useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useSkillUnionIndex)
+{
+    orderRecord.push(useSkillUnionIndex+1);
+    for(let index in lengthToSkill) lengthToSkill[index] -=addTime;
+    for(let index in lineYPos) lineYPos[index] +=addTime;
+    
+    drawUnion(useSkillUnionIndex+1,lineYPos[useSkillUnionIndex],time);
+    
+    if(lengthToSkill[useSkillUnionIndex]==0)
+    {
+        lengthToSkill[useSkillUnionIndex]+= skillLength[useSkillUnionIndex];
+    }
+    
+    useSkillChargeCalculation(lengthToSkill,skillLength,useSkillUnionIndex);
 }
 
 function useSkillChargeCalculation(lengthToSkill,skillLength,useSkillUnionIndex)
