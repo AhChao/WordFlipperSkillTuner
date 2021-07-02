@@ -39,6 +39,7 @@ function clickCalculate()
     cleanSVG();
     orderRecord = [];
     reloadDictData();
+    checkChargeTime();
     let skillLength = [inputDict["unionSkill1"],inputDict["unionSkill2"],inputDict["unionSkill3"]];
     
     let initLength = [skillLength[0]*(inputDict["unionInitCharge1"]*0.01),
@@ -48,6 +49,21 @@ function clickCalculate()
     console.log(skillLength,initLength);
 
     loopGenerateLine(skillLength,initLength,1500);
+}
+
+function checkChargeTime()
+{
+    //if no input or 0 default wit unlimited
+    for(let i=1;i<=3;i++)
+    {
+        for(let i2=1;i2<=3;i2++)
+        {
+            if(inputDict["unionSkillChargeTime"+String(i)+String(i2)] == 0 )
+            {
+                inputDict["unionSkillChargeTime"+String(i)+String(i2)] = 999;
+            }                
+        }
+    }
 }
 
 function loopGenerateLine(skillLength,initLength,endValue)
@@ -64,10 +80,10 @@ function loopGenerateLine(skillLength,initLength,endValue)
             let addTime = Math.min(...lengthToSkill);
             time += addTime;
             let useSkillUnionIndex = getIndexOfMin(lengthToSkill);
-            if(getValueAppearTimes(Math.min(...lengthToSkill),lengthToSkill)>1)
+            let useSkillInSameTimeCount = getValueAppearTimes(Math.min(...lengthToSkill),lengthToSkill)
+            if( useSkillInSameTimeCount > 1 )
                 useSkillUnionIndex = skillInSameTimeReturnWhichIndexToUse(skillOrder,lengthToSkill);
-
-            useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useSkillUnionIndex);
+            useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useSkillUnionIndex,useSkillInSameTimeCount);
             
     }
     writeDownSkillUseOrder();
@@ -85,13 +101,14 @@ function skillInSameTimeReturnWhichIndexToUse(skillOrder,lengthToSkill)
     }
 }
 
-function useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useSkillUnionIndex)
+function useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useSkillUnionIndex,useSkillInSameTimeCount)
 {
     orderRecord.push(useSkillUnionIndex+1);
     for(let index in lengthToSkill) lengthToSkill[index] -=addTime;
     for(let index in lineYPos) lineYPos[index] +=addTime;
     
-    drawUnion(useSkillUnionIndex+1,lineYPos[useSkillUnionIndex],time);
+    console.log("Hehe",time,useSkillInSameTimeCount,time-(useSkillInSameTimeCount-1)*15);
+    drawUnion(useSkillUnionIndex+1,lineYPos[useSkillUnionIndex],time-(useSkillInSameTimeCount-1)*15);
     
     if(lengthToSkill[useSkillUnionIndex]==0)
     {
