@@ -9,6 +9,8 @@ const ids = ['unionSkill1', 'unionSkill2', 'unionSkill3',
 let inputDict = {};
 let orderRecord = [];
 let sameTimePadding = 20;
+let lastTimeSKillYPos = -1;
+let lastTimePlus = 0;
 
 const elements = document.querySelectorAll(ids.map(id => `#${id}`).join(', '));
 
@@ -78,17 +80,16 @@ function loopGenerateLine(skillLength,initLength,endValue)
     let lineYPos = [0,0,0]; 
     let time = 0;
     let skillOrder = document.getElementById("skillOrder2").checked == true ? [2,3,1] : [1,2,3];
-    
+
     while(Math.min(...lineYPos)<endValue)
-    {//function drawUnion(unionNo,text,yPos)
-            let addTime = Math.min(...lengthToSkill);
-            time += addTime;
-            let useSkillUnionIndex = getIndexOfMin(lengthToSkill);
-            let useSkillInSameTimeCount = getValueAppearTimes(Math.min(...lengthToSkill),lengthToSkill)
-            if( useSkillInSameTimeCount > 1 )
-                useSkillUnionIndex = skillInSameTimeReturnWhichIndexToUse(skillOrder,lengthToSkill);
-            useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useSkillUnionIndex,useSkillInSameTimeCount);
-            
+    {
+        let addTime = Math.min(...lengthToSkill);
+        time += addTime;
+        let useSkillUnionIndex = getIndexOfMin(lengthToSkill);
+        let useSkillInSameTimeCount = getValueAppearTimes(Math.min(...lengthToSkill),lengthToSkill);
+        if( useSkillInSameTimeCount > 1)
+            useSkillUnionIndex = skillInSameTimeReturnWhichIndexToUse(skillOrder,lengthToSkill);
+        useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useSkillUnionIndex,useSkillInSameTimeCount);
     }
     writeDownSkillUseOrder();
 }
@@ -110,7 +111,17 @@ function useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useS
     for(let index in lengthToSkill) lengthToSkill[index] -=addTime;
     for(let index in lineYPos) lineYPos[index] +=addTime;
     
-    drawUnion(useSkillUnionIndex+1,lineYPos[useSkillUnionIndex],time-(useSkillInSameTimeCount-1)*sameTimePadding);
+    console.log(useSkillUnionIndex,lineYPos[useSkillUnionIndex],lastTimeSKillYPos)
+    if(lineYPos[useSkillUnionIndex] == lastTimeSKillYPos)
+    {
+        lastTimePlus += 1;
+    }
+    else
+    {
+        lastTimePlus = 0;
+    }
+    lastTimeSKillYPos = lineYPos[useSkillUnionIndex];
+    drawUnion(useSkillUnionIndex+1,lineYPos[useSkillUnionIndex],time-(useSkillInSameTimeCount-1)*sameTimePadding+lastTimePlus*sameTimePadding);
     
     if(lengthToSkill[useSkillUnionIndex]==0)
     {

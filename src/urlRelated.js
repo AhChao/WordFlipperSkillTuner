@@ -1,7 +1,7 @@
 function clickGenerateLink()
 {
     reloadDictData();
-    var inputDictStr = encodeURIComponent(JSON.stringify(inputDict));
+    var inputDictStr = JSON.stringify(inputDict);
     var skillOrder = document.getElementById("skillOrder1").checked == true ? 1 : 2;
     let link = window.location.href + "?isSharedLinkinputDictStr"+inputDictStr+"skillOrder"+skillOrder;
     if(document.getElementById("usingShortenLinkCheckbox").checked)
@@ -31,6 +31,7 @@ function loadFromUrl(linkData)
 	let skillOrderData = linkData.split('skillOrder')[1]
     inputDict = JSON.parse(inputDictData);
     fillUIWithInputDictAndSkillOrder(skillOrderData);
+    clickCalculate();
 }
 
 function fillUIWithInputDictAndSkillOrder(skillOrder)
