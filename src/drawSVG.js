@@ -8,7 +8,7 @@ let secondaryColor = "#6c757d";
 let warningColor = "#ffc107";
 let textColor = "#000000";
 let textXPadding = drawWitdh/16;
-let textYPadding = drawWitdh/18;
+let textYPadding = drawWitdh/16;
 let sizeScale = 0.5;
 let distanceScale = 0.5;
 
@@ -40,7 +40,6 @@ function drawBaseLine()
 
 function drawUnion(unionNo,text,yPos)
 {
-    console.log("drawUnion:",unionNo,text,yPos);
     let x;
     let y = yPos;
     let fillColor;

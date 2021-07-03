@@ -8,12 +8,19 @@ const ids = ['unionSkill1', 'unionSkill2', 'unionSkill3',
 'unionSkillChargeTime31','unionSkillChargeTime32','unionSkillChargeTime33'];
 let inputDict = {};
 let orderRecord = [];
+let sameTimePadding = 20;
 
 const elements = document.querySelectorAll(ids.map(id => `#${id}`).join(', '));
 
 function init()
 {
     svgInit();
+    let urlParams = window.location.search;
+    if(urlParams.indexOf('isSharedLink')!=-1)
+    {
+        urlParams = urlParams.split('isSharedLink')[1];
+        loadFromUrl(urlParams);
+    }
 }
 
 function reloadDictData()
@@ -45,9 +52,6 @@ function clickCalculate()
     let initLength = [skillLength[0]*(inputDict["unionInitCharge1"]*0.01),
                     skillLength[1]*(inputDict["unionInitCharge2"]*0.01),
                     skillLength[2]*(inputDict["unionInitCharge3"]*0.01),];
-
-    console.log(skillLength,initLength);
-
     loopGenerateLine(skillLength,initLength,1500);
 }
 
@@ -94,7 +98,6 @@ function skillInSameTimeReturnWhichIndexToUse(skillOrder,lengthToSkill)
     let minValue = Math.min(...lengthToSkill);   
     let meetMinIndex = [];
     for(let i in lengthToSkill) if(lengthToSkill[i]==minValue) meetMinIndex.push(parseInt(i)+1);
-    console.log("Same Time Detect",minValue,meetMinIndex,skillOrder);
     for(let i in skillOrder)
     {
         if(meetMinIndex.includes(skillOrder[i])) return skillOrder[i]-1;
@@ -107,8 +110,7 @@ function useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useS
     for(let index in lengthToSkill) lengthToSkill[index] -=addTime;
     for(let index in lineYPos) lineYPos[index] +=addTime;
     
-    console.log("Hehe",time,useSkillInSameTimeCount,time-(useSkillInSameTimeCount-1)*15);
-    drawUnion(useSkillUnionIndex+1,lineYPos[useSkillUnionIndex],time-(useSkillInSameTimeCount-1)*15);
+    drawUnion(useSkillUnionIndex+1,lineYPos[useSkillUnionIndex],time-(useSkillInSameTimeCount-1)*sameTimePadding);
     
     if(lengthToSkill[useSkillUnionIndex]==0)
     {

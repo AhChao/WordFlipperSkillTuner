@@ -174,7 +174,18 @@
                     <div class="col-6">
                         <button type="button" class="btn btn-primary rounded-pill w-100 px-10" onclick="clickClear()">清除</button>
                     </div>
-                </div>                
+                </div>        
+                <div class="row justify-content-center">
+                    <div class="col-12 text-center fs-4">分享頁面設定<span class="fs-6"> <input type="checkbox" id="usingShortenLinkCheckbox">使用短網址</span>
+                        <input id="sharedLinkField" type="text" class="w-100" placeholder="請按產生網址按鈕↓">
+                    </div>
+                    <div class="col-6 mt-2">
+                        <button id="formLinkButton" type="button" class="btn btn-primary rounded-pill w-100" onclick="clickGenerateLink()">產生網址</button>
+                    </div>
+                    <div class="col-6 mt-2">
+                        <button type="button" class="btn btn-primary rounded-pill w-100 px-10" onclick="clickCopyLink()">複製網址</button>
+                    </div>
+                </div>
             </div>
             <div class="col-5">
                 <p class="fs-2 col-12">技能施放順序</p>
@@ -191,5 +202,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="./src/main.js"></script>
     <script src="./src/drawSVG.js"></script>
+    <script src="./src/urlRelated.js"></script>
+    <script src="./src/shortenUrlService.js"></script>
 </body>
 </html>
