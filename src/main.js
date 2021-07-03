@@ -133,9 +133,9 @@ function useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useS
 
 function useSkillChargeCalculation(lengthToSkill,skillLength,useSkillUnionIndex)
 {    
-    let skillChargeRatio = [inputDict["unionSkillCharge"+(useSkillUnionIndex+1)+"1"],
-                            inputDict["unionSkillCharge"+(useSkillUnionIndex+1)+"2"],
-                            inputDict["unionSkillCharge"+(useSkillUnionIndex+1)+"3"]];
+    let skillChargeRatio = [inputDict["unionSkillCharge"+(useSkillUnionIndex+1)+"1"]*0.01,
+                            inputDict["unionSkillCharge"+(useSkillUnionIndex+1)+"2"]*0.01,
+                            inputDict["unionSkillCharge"+(useSkillUnionIndex+1)+"3"]*0.01];
     for(let index in lengthToSkill)
     {
         if(inputDict["unionSkillChargeTime"+String(useSkillUnionIndex+1)+String(parseInt(index)+1)] > 0 )
