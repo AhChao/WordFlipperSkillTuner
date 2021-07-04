@@ -2,7 +2,7 @@ function clickGenerateLink()
 {
     reloadDictData();
     var inputDictStr = JSON.stringify(inputDict);
-    var skillOrder = document.getElementById("skillOrder1").checked == true ? 1 : 2;
+    var skillOrder = JSON.stringify(document.getElementById("skillOrder").value.split("skillOrder")[1].split(""));
     let link = window.location.href + "?isSharedLinkinputDictStr"+inputDictStr+"skillOrder"+skillOrder;
     if(document.getElementById("usingShortenLinkCheckbox").checked)
     {
@@ -30,7 +30,8 @@ function loadFromUrl(linkData)
     let inputDictData = linkData.split('inputDictStr')[1].split('skillOrder')[0];
 	let skillOrderData = linkData.split('skillOrder')[1]
     inputDict = JSON.parse(inputDictData);
-    fillUIWithInputDictAndSkillOrder(skillOrderData);
+    inputSkillOrder = JSON.parse(skillOrderData);
+    fillUIWithInputDictAndSkillOrder(inputSkillOrder);
     clickCalculate();
 }
 
@@ -41,5 +42,5 @@ function fillUIWithInputDictAndSkillOrder(skillOrder)
         let inputNode = document.getElementById(ids[i]);
         inputNode.value = inputDict[ids[i]];
     }
-    document.getElementById("skillOrder"+skillOrder).checked == true
+    document.getElementById("skillOrder").value = "skillOrder"+skillOrder.join("");
 }

@@ -11,6 +11,7 @@ let orderRecord = [];
 let sameTimePadding = 20;
 let lastTimeSKillYPos = -1;
 let lastTimePlus = 0;
+let loopForeverPreventor = 300;
 
 const elements = document.querySelectorAll(ids.map(id => `#${id}`).join(', '));
 
@@ -45,6 +46,7 @@ function calculateUnionSkillLength(positionId)
 
 function clickCalculate()
 {
+    loopForeverPreventor = 300;
     cleanSVG();
     orderRecord = [];
     reloadDictData();
@@ -79,10 +81,11 @@ function loopGenerateLine(skillLength,initLength,endValue)
                         skillLength[2]-initLength[2],];
     let lineYPos = [0,0,0]; 
     let time = 0;
-    let skillOrder = document.getElementById("skillOrder2").checked == true ? [2,3,1] : [1,2,3];
+    let skillOrder = document.getElementById("skillOrder").value.split("skillOrder")[1].split("");
 
     while(Math.min(...lineYPos)<endValue)
     {
+        if(loopForeverPreventor < 0) break; // prevent forever loop
         let addTime = Math.min(...lengthToSkill);
         time += addTime;
         let useSkillUnionIndex = getIndexOfMin(lengthToSkill);
@@ -90,6 +93,7 @@ function loopGenerateLine(skillLength,initLength,endValue)
         if( useSkillInSameTimeCount > 1)
             useSkillUnionIndex = skillInSameTimeReturnWhichIndexToUse(skillOrder,lengthToSkill);
         useInputIndexSkill(lengthToSkill,skillLength,lineYPos,time,addTime,useSkillUnionIndex,useSkillInSameTimeCount);
+        loopForeverPreventor --;
     }
     writeDownSkillUseOrder();
 }
@@ -101,7 +105,7 @@ function skillInSameTimeReturnWhichIndexToUse(skillOrder,lengthToSkill)
     for(let i in lengthToSkill) if(lengthToSkill[i]==minValue) meetMinIndex.push(parseInt(i)+1);
     for(let i in skillOrder)
     {
-        if(meetMinIndex.includes(skillOrder[i])) return skillOrder[i]-1;
+        if(meetMinIndex.includes(parseInt(skillOrder[i]))) return parseInt(skillOrder[i]-1);
     }
 }
 
