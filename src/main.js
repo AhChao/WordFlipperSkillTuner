@@ -17,6 +17,7 @@ const elements = document.querySelectorAll(ids.map(id => `#${id}`).join(', '));
 
 function init()
 {
+    mapTooltip();
     svgInit();
     let urlParams = window.location.search;
     if(urlParams.indexOf('isSharedLink')!=-1)
@@ -24,6 +25,14 @@ function init()
         urlParams = urlParams.split('isSharedLink')[1];
         loadFromUrl(urlParams);
     }
+}
+
+function mapTooltip()
+{
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
 }
 
 function reloadDictData()
@@ -52,11 +61,12 @@ function clickCalculate()
     reloadDictData();
     checkChargeTime();
     let skillLength = [inputDict["unionSkill1"],inputDict["unionSkill2"],inputDict["unionSkill3"]];
-    
+    let timeLineLength = parseInt(document.getElementById("timeLineLength").value);
+    if(timeLineLength < 0) timeLineLength = 0;
     let initLength = [skillLength[0]*(inputDict["unionInitCharge1"]*0.01),
                     skillLength[1]*(inputDict["unionInitCharge2"]*0.01),
                     skillLength[2]*(inputDict["unionInitCharge3"]*0.01),];
-    loopGenerateLine(skillLength,initLength,1500);
+    loopGenerateLine(skillLength,initLength,timeLineLength);
 }
 
 function checkChargeTime()

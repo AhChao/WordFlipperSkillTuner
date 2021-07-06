@@ -20,7 +20,7 @@
     <div class="container">
         <div class="row mt-3">
             <div class="col-12 text-center text">
-                <h1>彈射世界 技能對軸Skill Tuner<span class="fs-6">v 1.1.0</span></h1>
+                <h1>彈射世界 技能對軸Skill Tuner<span class="fs-6">v 1.2.0</span></h1>
                 <span class="fs-6">※手機板或螢幕過小會跑版，手機板還在調整中</span>
             </div>
         </div>
@@ -204,15 +204,16 @@
                 <p id="skillUseOrderField" class="fs-4 col-12 border border-dark">
                     >
                 </p>
-                <p class="fs-2 col-12">技能時間軸</p>
+                <p class="fs-2 col-12">技能時間軸<span class="fs-6" data-bs-toggle="tooltip" data-bs-placement="top" title="會自動限縮上限為總共施放300次技能">時間軸長度：<input type="number" id="timeLineLength" value="1500"></span></p>
                 <svg id="skillPainter" class="w-100" style="height: 100%;">
                 </svg>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v7.min.js?v=210704"></script>
-    <script src="./src/main.js?v=210704"></script>
+    <script src="./src/main.js?v=210706"></script>
     <script src="./src/drawSVG.js?v=210704"></script>
     <script src="./src/urlRelated.js?v=210704"></script>
     <script src="./src/shortenUrlService.js?v=210704"></script>

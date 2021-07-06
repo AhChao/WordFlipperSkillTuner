@@ -75,4 +75,11 @@ function drawUnion(unionNo,text,yPos)
     .attr("y",textY*distanceScale)
     .attr("fill",textColor)
     .text(text);
+
+    let svgHeight = d3.select("#"+drawTarget).attr("height");
+    let rectBottomBorder = lineHeight*sizeScale + y*distanceScale;
+    if(svgHeight < rectBottomBorder)
+    {
+        d3.select("#"+drawTarget).attr("height",rectBottomBorder);
+    }
 }
