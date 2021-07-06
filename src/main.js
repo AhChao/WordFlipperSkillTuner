@@ -188,8 +188,8 @@ function getIndexOfMin(valueArr)
 
 function clickClear()
 {
-    for(let i in inputDict)
+    for(let i in ids)
     {
-        inputDict[i].value = '';
+        document.getElementById(ids[i]).value = 0;
     }
 }
